@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gold Necklace- Jewellery Bliss</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    .star-rating span {
+      cursor: pointer;
+      font-size: 1.25rem;
+    }
+  </style>
+</head>
+<body class="bg-gray-50">
+
+  <!-- Header -->
+  <header class="bg-white shadow p-4 text-center text-2xl font-bold text-pink-600">
+    Jewellery Bliss - Product Details
+  </header>
+
+  <!-- Product Detail Section -->
+  <section class="py-10 px-4 md:px-20">
+    <div class="bg-white rounded-xl shadow-md p-6 md:p-10 flex flex-col md:flex-row gap-10 items-start">
+      
+      <!-- Image -->
+      <img src="g1.png" alt="Gold Necklace" class="w-80 h-80 object-contain rounded-lg border">
+
+      <!-- Product Info -->
+      <div class="flex-1">
+        <h1 class="text-3xl font-bold text-gray-800 mb-2">Gold Necklace</h1>
+        <p class="text-green-600 font-semibold mb-1">Free Shipping </p>
+        <p class="mb-3 text-sm"><span class="font-semibold">Availability:</span> <span class="text-green-800 font-bold">In Stock</span></p>
+
+        <!-- Price -->
+        <p class="text-3xl text-pink-600 font-bold mb-1">₹90,000</p>
+        <p class="text-sm text-gray-500 mb-4">(Inclusive of all taxes)</p>
+
+        
+        <!-- Cost Breakdown -->
+        <div class="grid grid-cols-2 sm:grid-cols-3 text-sm text-gray-700 gap-y-2 mb-4">
+          <div><strong>cost</strong><br>₹79,428</div>
+          <div><strong>Making</strong><br>₹7,943</div>
+          <div><strong>Tax</strong><br>₹2,629</div>
+          <div><strong>Discount</strong><br><span class="text-green-600">no Discount</span></div>
+        </div>
+
+       <!-- Rating -->
+      <div class="mb-6">
+        <p class="text-sm mb-1">Rate this product:</p>
+        <div class="flex space-x-1 cursor-pointer text-xl text-yellow-400" id="rating">
+          <span onclick="rate(1)">☆</span>
+          <span onclick="rate(2)">☆</span>
+          <span onclick="rate(3)">☆</span>
+          <span onclick="rate(4)">☆</span>
+          <span onclick="rate(5)">☆</span>
+        </div>
+      </div>
+
+      <button  class="bg-pink-700 text-white w-full py-3 rounded-md font-semibold hover:bg-pink-800 transition" onclick="goToCheckout()">
+        Buy Now
+       </button>
+        <script>
+          function goToCheckout(name, code, price, image) {
+            // On product card click or Buy Now button
+          const selectedProduct = {
+          name: "Gold Necklace",
+          code: "MC321",
+          price: 90000,
+          image:"g1.png"
+  };
+  
+          localStorage.setItem("selectedProduct", JSON.stringify(selectedProduct));
+          window.location.href = "checkout.html";
+  
+          }
+        </script>      
+      </div>
+    </div>
+  </section>
+  <!-- Footer -->
+  <footer class="bg-white text-center p-4 mt-10 text-gray-500">
+    &copy; 2025 Jewellery Bliss. All rights reserved.
+  </footer>
+  
+  <!-- Rating Script -->
+  <script>
+    function rate(stars) {
+      const ratingContainer = document.getElementById("rating");
+      const starsArray = ratingContainer.getElementsByTagName("span");
+      for (let i = 0; i < starsArray.length; i++) {
+        starsArray[i].textContent = i < stars ? "★" : "☆";
+      }
+    }
+  </script>
+  </body>
+  </html>

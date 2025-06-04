@@ -4,15 +4,10 @@ const Feedback = require('../models/Feedback');
 const router = express.Router();
 
 // Place an order
-
- router.post('/place-order', async (req, res) => {
+router.post('/place-order', async (req, res) => {
   try {
-    const { upiPin, ...safeOrderData } = req.body;
-
-    // ✅ Save only safe data to MongoDB
-    const order = await Order.create(safeOrderData);
-    // const order = new Order(req.body);
-    //await order.save();
+    const order = new Order(req.body);
+    await order.save();
     res.status(201).json({ message: 'Order placed successfully', order });
   } catch (error) {
     console.error('Error placing order:', error);

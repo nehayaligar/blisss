@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Elegant Diamond Necklace - Jewellery Bliss</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-white text-gray-800">
+
+  <!-- Header -->
+  <header class="bg-[#FFC0CB] text-white px-6 py-3 font-bold text-xl">
+    Jewellery Bliss
+  </header>
+
+  <!-- Main Product Section -->
+  <main class="max-w-6xl mx-auto p-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+      
+      <!-- Product Image -->
+      <div class="flex justify-center items-center">
+        <img src="necklace5.jpg" alt="Elegant Diamond Necklace" class="rounded-lg shadow-lg w-full max-w-md object-cover">
+      </div>
+
+      <!-- Product Details -->
+      <div>
+        <h1 class="text-3xl font-bold mb-4">Elegant Diamond Necklace</h1>
+        <p class="text-gray-600 text-lg mb-2">Product Code: DN1002</p>
+        <p class="text-pink-600 text-2xl font-semibold mb-4">₹45,000</p>
+
+        <p class="mb-6 text-gray-700">
+          Add a touch of timeless glamour to your ensemble with this exquisitely crafted gold-plated necklace and matching earrings set. Featuring a dazzling row of high-quality cubic zirconia stones set in a graceful, graduated design, the necklace exudes sophistication and brilliance. The set is completed with a pair of elegant drop earrings, each adorned with two shimmering stones for a perfectly balanced sparkle.
+        </p>
+        <!-- Add this inside the product details section, before the Buy Now button -->
+<div class="mb-6">
+  <h2 class="text-xl font-semibold mb-2">Select Payment Method</h2>
+  <label class="inline-flex items-center mr-6">
+    <input type="radio" name="paymentMethod" value="UPI" checked class="form-radio">
+    <span class="ml-2">UPI</span>
+  </label>
+  <label class="inline-flex items-center mr-6">
+    <input type="radio" name="paymentMethod" value="Net Banking" class="form-radio">
+    <span class="ml-2">Net Banking</span>
+  </label>
+  <label class="inline-flex items-center">
+    <input type="radio" name="paymentMethod" value="Cash on Delivery" class="form-radio">
+    <span class="ml-2">Cash on Delivery</span>
+  </label>
+</div>
+
+<script>
+  async function buyNow(productId, amount, paymentMethod) {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      alert('Please login to make a purchase.');
+      window.location.href = 'login.html';
+      return;
+    }
+    try {
+const response = await fetch('http://localhost:5001/api/purchase', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + token
+        },
+        body: JSON.stringify({ productId, amount, paymentMethod })
+      });
+      const data = await response.json();
+      if (response.ok) {
+        alert(data.message + ' Payment method: ' + paymentMethod);
+      } else {
+        alert('Purchase failed: ' + data.error);
+      }
+    } catch (error) {
+      alert('Error: ' + error.message);
+    }
+  }
+
+  document.getElementById('buyNowBtn').addEventListener('click', () => {
+    const productId = 'DN1001';
+    const amount = 45000;
+    const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked').value;
+    buyNow(productId, amount, paymentMethod);
+  });
+</script>
+
+
+        <!-- Actions -->
+        <div class="flex flex-col sm:flex-row gap-4">
+          <button class="bg-pink-700 text-white w-full py-3 rounded-md font-semibold hover:bg-pink-800 transition">
+            Buy Now
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Product Info Tabs (Optional) -->
+    <div class="mt-12">
+      <h2 class="text-xl font-bold mb-2">Product Specifications</h2>
+      <ul class="list-disc pl-5 text-gray-700 space-y-1">
+        <li>Material: Gold-plated alloy</li>
+        <li>Stones: Premium cubic zirconia (diamond look-alike)</li>
+        <li>Necklace Style: Classic tennis chain with adjustable clasp</li>
+        <li>Delivery: Within 7-10 business days</li>
+      </ul>
+    </div>
+  </main>
+  
+
+</body>
+</html>
